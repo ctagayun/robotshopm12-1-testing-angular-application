@@ -1,0 +1,56 @@
+<!-- see: https://app.pluralsight.com/ilx/video-courses/d5d30ea4-0af1-447a-b13a-e60a095337a6/a4d43da9-1ae5-4f47-9c17-c1c7d34c0103/8d764b94-11d4-42da-820d-8ce3cf9f007e -->
+<div class="container">
+  <form class="form">
+    <div class="header">Form Control Examples</div>
+
+    <div class="control">
+      <!-- *textInput is a property of template-form-control.component.ts defined as string -->
+       <input name="textInput" type="text" [(ngModel)]="textInput" />
+      <div>Value: {{textInput}} Type: {{getType(textInput)}}</div>
+    </div>
+
+    <div class="control">
+      <!-- *numericInput is a property of template-form-control.component.ts defined as number -->
+      <input name="numberInput" type="number" [(ngModel)]="numericInput" />
+      <div>Value: {{numericInput}} Type: {{getType(numericInput)}}</div>
+    </div>
+
+    <div class="control">
+       <!-- *stringInput is a property of template-form-control.component.ts defined as string -->
+       <!-- *Note options is using ngFor to generate options from a property called "selectOptions" in our component-->
+      <select name="select" type="select" [(ngModel)]="stringInput">
+        <option *ngFor="let option of selectOptions" [value]="option.value">{{option.text}}</option>
+      </select>
+      <div>Value: {{stringInput}} Type: {{getType(stringInput)}}</div>
+    </div>
+
+    <div class="control">
+      <select name="numericSelect" type="numericSelect" [(ngModel)]="numericSelect">
+    <!-- *Note options are typed in manually. Use ngValue instead of "value" if you want
+     *   to keep the string value of the option e.g "1" "2" -->
+        <option [ngValue]="1">One</option>
+        <option [ngValue]="2">Two</option>
+      </select>
+      <div>Value: {{numericSelect}} Type: {{getType(numericSelect)}}</div>
+    </div>
+
+    <div class="control">
+      <div>
+
+        <!-- * For radio buttons use  the [value] (with bracket) attribute to make the type a number -->
+        <input name="radioInput" type="radio" [value]="1" [(ngModel)]="radioInput" /> Radio One
+      </div>
+      <div>
+         <!-- * For radio buttons use  the "value" (no bracket) attributes to make the type strings -->
+        <input name="radioInput" type="radio" value="2" [(ngModel)]="radioInput" /> Radio Two
+      </div>
+      <div>Value: {{radioInput}} Type: {{getType(radioInput)}}</div>
+    </div>
+
+    <div class="control">
+      <!-- * Checkbox data type sent to the property "checkBoxInput" will always be boolean -->
+      <div><input type="checkbox" name="checkboxInput" [(ngModel)]="checkboxInput" /> Checkbox Input</div>
+      <div>Value: {{checkboxInput}} Type: {{getType(checkboxInput)}}</div>
+    </div>
+  </form>
+</div>

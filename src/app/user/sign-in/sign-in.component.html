@@ -1,0 +1,70 @@
+<div class="container">
+  <!-- *First thing to do is add template variable #signInForm and
+   set it to the ngForm directive will provide us a bunch of inf about
+   the form
+    -->
+  <form #signInForm="ngForm"  class="form" (ngSubmit)="signIn()">
+    <img class="logo" src="/assets/images/logo.png" />
+    <div class="sign-in">Sign In</div>
+    <div class="sub-text">to acquire awesome bots</div>
+    <!-- *Next add a template variable for email and set it to ngModel. It creates a
+     *FormControl instance from a domain model and binds it to a form control element.
+     *ngIf="email.errors?.['required']  this means if the required object has a "required" property
+     -->
+     
+    <input name="email" required email #email="ngModel" [(ngModel)]="credentials.email" placeholder="Email Address"  type="text" />
+    <em class="error" *ngIf="email.errors?.['required'] && email.touched">Email is required</em>
+    <em class="error" *ngIf="email.errors?.['email'] && email.touched">Must be a valid email format</em>
+
+    <!-- *the below code prints the value of credentials.email to prove 2-way binding works -->
+    {{credentials.email}}
+
+     <!-- Next add a template variable for password and set it to ngModel -->
+    <input name="password" required #password="ngModel" [(ngModel)]="credentials.password" placeholder="Password" type="password" />
+    <em class="error" *ngIf="password.invalid && password.touched">Password is required</em>
+    {{credentials.password}}
+
+    <div class="buttons">
+      <!-- *Disable button if any of the fields are invalid. signInForm is the template variable-->
+      <button type="submit" [disabled]="signInForm.form.invalid" class="button cta">
+        Sign In
+      </button>
+    </div>
+     <!-- *Add this. Show only if error flag is true -->
+    <div class="signInError" *ngIf="signInError">
+      Sign-In Failed. Please try again.
+    </div>
+  </form>
+
+  <!-- * These are bunch of infromation coming from template variable "#signInForm" -->
+  <div>
+    <b>Form Information</b> <br />
+    <br />
+    <label>signInForm.valid:</label> {{signInForm.valid}} <br />
+    <label>signInForm.invalid:</label> {{signInForm.invalid}} <br />
+    <br />
+    <label>signInForm.dirty:</label> {{signInForm.dirty}} <br />
+    <label>signInForm.pristine:</label> {{signInForm.pristine}}<br />
+    <br>
+    <label>signInForm.touched:</label> {{signInForm.touched}}<br />
+    <label>signInForm.untouched:</label> {{signInForm.untouched}}<br />
+    <br>
+    <label>signInForm.submitted:</label> {{signInForm.submitted}}<br />
+
+  </div>
+    <!-- These are bunch of infromation coming from template variable "#email" -->
+
+  <div>
+    <b>Control Information</b> <br />
+    <br />
+    <label>email.valid:</label> {{email.valid}} <br />
+    <label>email.invalid:</label> {{email.invalid}} <br />
+    <br />
+    <label>email.dirty:</label> {{email.dirty}} <br />
+    <label>email.pristine:</label> {{email.pristine}} <br />
+    <br>
+    <label>email.touched:</label> {{email.touched}} <br />
+    <label>email.untouched:</label> {{email.untouched}} <br />
+
+  </div>
+</div>
